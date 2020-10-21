@@ -14,7 +14,12 @@ app.use(express.static("public"));
 
 mongoose.connect(
   process.emitWarning.MONGODB_URI || "mongodb://localhost/fitness",
-  { useNewUrlParser: true, useUnifiedTopology: true }
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  }
 );
 
 const connection = mongoose.connection;
