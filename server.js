@@ -5,9 +5,12 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
+const db = require("./models");
+
 // Express Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static("public"));
 
 mongoose.connect(
   process.emitWarning.MONGODB_URI || "mongodb://localhost/fitness",
