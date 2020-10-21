@@ -5,8 +5,6 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-const db = require("./models");
-
 // Express Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -24,6 +22,8 @@ mongoose.connect(
 
 const connection = mongoose.connection;
 
+
+// Connection tests for mongoose
 connection.on("connected", () => {
   console.log("Mongoose successfully connected.");
 });
@@ -38,6 +38,11 @@ app.get("/api/config", (req, res) => {
     success: true,
   });
 });
+
+
+// routes for HTML paths and API paths
+require("./routes/apiRoutes")(app)
+require("./routes/htmlRoutes")(app)
 
 app.listen(PORT, () => {
   console.log(`App is listening on http://localhost:${PORT}`);
