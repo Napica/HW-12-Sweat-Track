@@ -32,14 +32,6 @@ connection.on("error", (err) => {
   console.log("Mongoose connection error: ", err);
 });
 
-// test route for making sure server is connected
-app.get("/api/config", (req, res) => {
-  res.json({
-    success: true,
-  });
-});
-
-
 // routes for HTML paths and API paths
 require("./routes/apiRoutes.js")(app)
 require("./routes/htmlRoutes.js")(app)
