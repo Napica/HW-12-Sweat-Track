@@ -7,8 +7,8 @@ module.exports = function (app) {
       success: true,
     });
   });
-
-  app.get("/api/workouts", function (req, res) {
+  // displays current workout
+  app.get("/api/workouts", (req, res) => {
     // console.log(req.body)
     db.Workout.find({})
       .then((dbWorkout) => {
@@ -19,8 +19,9 @@ module.exports = function (app) {
       });
   });
 
-  app.post("/api/workouts", function (req, res) {
-    console.log(req.body);
+  // creates now workout
+  app.post("/api/workouts", (req, res) => {
+    // console.log(req.body);
     db.Workout.create(req.body)
       .then((dbWorkout) => {
         res.json(dbWorkout);
@@ -30,10 +31,9 @@ module.exports = function (app) {
       });
   });
 
-
   // logs new input
-  app.put("/api/workouts/:id", function (req, res) {
-    console.log(req.params.id);
+  app.put("/api/workouts/:id", (req, res) => {
+    // console.log(req.params.id);
     db.Workout.findByIdAndUpdate(
       req.params.id,
       {
@@ -43,7 +43,7 @@ module.exports = function (app) {
     )
       .then((dbExercise) => {
         // console.log(dbExercise);
-        res.json(dbExercise)
+        res.json(dbExercise);
       })
       .catch((err) => {
         res.json(err);
@@ -61,4 +61,15 @@ module.exports = function (app) {
   //       res.json(err);
   //     });
   // });
+
+  app.get("/api/workouts/range", (req, res) => {
+    // console.log(req.body);
+    db.Workout.find({})
+      .then((rangeWorkout) => {
+        res.json(rangeWorkout);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+  });
 };
