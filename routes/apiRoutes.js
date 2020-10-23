@@ -9,7 +9,6 @@ module.exports = function (app) {
   });
   // displays current workout
   app.get("/api/workouts", (req, res) => {
-    // console.log(req.body)
     db.Workout.find({})
       .then((dbWorkout) => {
         res.json(dbWorkout);
@@ -21,7 +20,6 @@ module.exports = function (app) {
 
   // creates now workout
   app.post("/api/workouts", (req, res) => {
-    // console.log(req.body);
     db.Workout.create(req.body)
       .then((dbWorkout) => {
         res.json(dbWorkout);
@@ -33,7 +31,6 @@ module.exports = function (app) {
 
   // logs new input
   app.put("/api/workouts/:id", (req, res) => {
-    // console.log(req.params.id);
     db.Workout.findByIdAndUpdate(
       req.params.id,
       {
@@ -42,7 +39,6 @@ module.exports = function (app) {
       { new: true }
     )
       .then((dbExercise) => {
-        // console.log(dbExercise);
         res.json(dbExercise);
       })
       .catch((err) => {
@@ -50,20 +46,8 @@ module.exports = function (app) {
       });
   });
 
-  // for testing
-  // app.put("/api/workouts/:id", function (req, res) {
-  //   console.log(req.params.id);
-  //   db.Workout.findByIdAndUpdate(req.params.id, { exercises: req.body })
-  //     .then((dbExercise) => {
-  //       console.log(dbExercise);
-  //     })
-  //     .catch((err) => {
-  //       res.json(err);
-  //     });
-  // });
-
+  // get route for dashboard for all workouts
   app.get("/api/workouts/range", (req, res) => {
-    // console.log(req.body);
     db.Workout.find({})
       .then((rangeWorkout) => {
         res.json(rangeWorkout);
